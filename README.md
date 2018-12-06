@@ -1,4 +1,4 @@
-# BTCPayServer Documentation
+# BTCPayJungle Server Documentation
 
 ## Introduction
 
