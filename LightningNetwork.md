@@ -57,7 +57,6 @@ Regardless of the implementation (c-lightning or LND) you've decided to use, the
 
 ![LightningNetworkSettup4](img/LightningNetworkNodeSetup4.jpg)
 
-
 ## Getting Started with BTCPay and LND
 
 The easiest way to use LND implementation with BTCPay is to use [Zap wallet integration](https://github.com/LN-Zap/zap-tutorials/blob/master/zap-desktop-btcpay-server.md).
@@ -80,11 +79,15 @@ Run `./bitcoin-lncli.sh --help` to see a full list of commands or check above me
 
 ## Getting Started with BTCPay and c-lightning
 
-The most straightforward way to start using the c-lightning implementation in BTCPay is to use Spark Wallet integration. Just like Zap for LND, Spark is a graphical interface of your internal c-lightning node.
+The most straightforward way to start using the c-lightning implementation in BTCPay is to use [Spark Wallet](https://github.com/shesek/spark-wallet) integration. Just like Zap for LND, Spark is a graphical interface of your internal c-lightning node.
 
-Spark works like an internal wallet in BTCPay right out of the box. Go to Server Settings > Services > Spark Server > More information to access your wallet.
+You can use Spark as an internal or external wallet. Internal wallet allows users to use Spark via the web-browser inside their BTCPay Server. You can also connect to an external wallet, like mobile or desktop app by just scanning a QR code.
+
+Go to **Server Settings > Services > Spark Server > See information**
 
 ![Accessing Spark wallet](img/SparkConnect.jpg)
+
+![Accessing Spark wallet](img/SparkConnect2.jpg.png)
 
 ### c-lightning Commands lightning-cli
 
