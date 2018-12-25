@@ -1,8 +1,8 @@
 # Lightning Network and BTCPay
 
-After deploying BTCPay Server, as a merchant, you may want to experiment with an innovative second-layer payment system built on top of Bitcoin protocol - the [Lightning Network](https://en.bitcoin.it/wiki/Lightning_Network).
+After deploying BTCPay Server, you may want to experiment with an innovative second-layer payment system built on top of Bitcoin protocol - the [Lightning Network](https://en.bitcoin.it/wiki/Lightning_Network).
 
-This guide will show you how to set up your Lightning Network node in BTCPay and guide you through some basics.
+This guide will show you how to set up your Lightning Network node in BTCPay and guide you through the basics.
 
 <strong>Before you proceed, please understand that Lightning Network is still in the experimental stage. Do not put the money you can't afford to lose. There is a high risk of you losing the money. </strong>
 
@@ -81,7 +81,9 @@ Run `./bitcoin-lncli.sh --help` to see a full list of commands or check above me
 
 The most straightforward way to start using the c-lightning implementation in BTCPay is to use [Spark Wallet](https://github.com/shesek/spark-wallet) integration. Just like Zap for LND, Spark is a graphical interface of your internal c-lightning node.
 
-You can use Spark as an internal or external wallet. Internal wallet allows users to use Spark via the web-browser inside their BTCPay Server. You can also connect to an external wallet, like mobile or desktop app by just scanning a QR code.
+You can use Spark as an internal or external wallet. Internal wallet allows users to use Spark via the web-browser inside their BTCPay Server. You can also connect externally to a Spark mobile or desktop app just by scanning a QR code.
+
+[![c-lightningbtcpay](https://img.youtube.com/vi/uV1R6IQpmg8/mqdefault.jpg)](https://www.youtube.com/watch?v=uV1R6IQpmg8 "BTCPay - c-lightning and Spark")
 
 Go to **Server Settings > Services > Spark Server > See information**
 
@@ -102,3 +104,16 @@ cd btcpayserver-docker
 ```
 E.g. to list all commands: `./bitcoin-lightning-cli.sh help`
 or show info about the node `./bitcoin-lightning-cli.sh getinfo`
+
+### Lapps (Lightning Network Apps)
+[Lapps](https://blockstream.com/2018/03/29/blockstreams-week-of-lapps-ends/) are applications built on top of the [Lightning Charge](https://blockstream.com/2018/01/16/lightning-charge/), a complimentary package that allows users and developers to easier use and develop on top of c-lightning. If you decided to use c-lightning, you can easily connect your BTCPay to any of the Lapps.
+
+BTCPay exposes all the necessary information required to connect your internal BTCPay c-lightning node to a Lightning Network App.  Go to Server Settings > Services > Lightning charge server > See information > Credentials.
+
+Below are videos that showcase how to connect some of the lapps to your BTCPay.
+
+[![c-lightningbtcpay1](https://img.youtube.com/vi/6EHNq1anD1k/mqdefault.jpg)](https://www.youtube.com/watch?v=6EHNq1anD1k "BTCPay - c-lightning and lapps intro")
+
+[![c-lightningbtcpay2](https://img.youtube.com/vi/ZbM3jcxau0o/mqdefault.jpg)](https://www.youtube.com/watch?v=ZbM3jcxau0o "BTCPay - c-lightning and lapps publisher")
+
+[![c-lightningbtcpay3](https://img.youtube.com/vi/EYrsU3LGpbI/mqdefault.jpg)](https://www.youtube.com/watch?v=EYrsU3LGpbI "BTCPay - c-lightning and lapps woo lightning")
