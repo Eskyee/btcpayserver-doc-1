@@ -35,6 +35,11 @@ Questions and solutions to BTCPay installation.
 * [Are there free hosts where I can test?](FAQ-Deployment.md#are-there-free-hosts-where-i-can-test)
 * [After initial deployment, I can't register and I don't have a login yet?](FAQ-Deployment.md#after-initial-deployment-i-cant-register-and-i-dont-have-a-login-yet)
 * [With the docker deployment, how to use a different volume for the data?](FAQ-Deployment.md#with-the-docker-deployment-how-to-use-a-different-volume-for-the-data)
+* [How do I activate Tor on my BTCPay Server?](FAQ-Deployment.md#how-do-i-activate-tor-on-my-btcpay-server)
+* [Why activate Tor? Does it mean that nobody knows who I am?](FAQ-Deployment.md#why-activate-tor-does-it-mean-that-nobody-knows-who-i-am)
+* [How can I modify/deactivate environment variables?](FAQ-Deployment.md#How-can-i-modifydeactivate-environment-variables)
+* [Can I start BTCPay only when I'm expecting a payment?](FAQ-Deployment.md#can-i-start-btcpay-only-when-im-expecting-a-payment)
+* [Can I use my existing BTC or LN node with BTCPay?](FAQ-Deployment.md#can-i-use-my-existing-btc-or-ln-node-with-btcpay)
 
 ### [Web Deployment FAQ](FAQ-Deployment.md#web-deployment-faq)
 #### [Luna Node Web Deployment FAQ](FAQ-Deployment.md#luna-node-web-deployment-faq)
@@ -44,6 +49,7 @@ Questions and solutions to BTCPay installation.
 * [Getting 500 nginx error on a local server https and for http (BTCPay is expecting you to access this website from)](FAQ-Deployment.md#getting-500-nginx-error-on-a-local-server-https-and-for-http-btcpay-is-expecting-you-to-access-this-website-from)
 * [How to manually install BTCPay on Ubuntu 18.04?](FAQ-Deployment.md#how-to-manually-install-btcpay-on-ubuntu-1804)
 * [Error: BTCPay is expecting you to access this website from...](FAQ-Deployment.md#btcpay-is-expecting-you-to-access-this-website-from)
+* [You access BTCPay Server over an unsecured network](FAQ-Deployment.md#btcpay-is-expecting-you-to-access-this-website-from)
 
 ## [Synchronization FAQ](FAQ-Synchronization.md)
 
