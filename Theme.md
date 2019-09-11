@@ -37,7 +37,7 @@ It is possible to entirely customize the checkout experience of your customer wi
 
 Go to your Store Settings, Checkout Experience, Link to a custom CSS stylesheet. Create your custom theme using these examples below:
 
-Server admins can upload their .css file to [File Storage](FAQ-ServerSettings.md#how-to-upload-files-to-btcpay) to create a CSS stylesheet link.
+Server admins can upload their .css file to [File Storage](FAQ/FAQ-ServerSettings.md#how-to-upload-files-to-btcpay) to create a CSS stylesheet link.
 
 ### Wear my liberty
 
@@ -136,7 +136,7 @@ html {
 }
 
 .invoice {
-  background-color: #15181c;
+  background-color: #343f4c;
 }
 
 .expired__body {
@@ -202,3 +202,31 @@ canvas {
 Logo:
 
 ![Blockstream logo](img/Theme-Blockstream-Logo.png)
+
+### Shiftcrypto
+
+![Shiftcrypto](img/Theme-cryptosecurity.png)
+
+CSS file:
+```css
+
+.top-header {background-color: #fff;}
+.top-header .timer-row__progress-bar {background:#5E94BF;}
+.top-header .timer-row {background: #AAAAAA;}
+.close-icon {color:#000;}
+.payment-tabs__slider {background: #5E94BF;     }
+.separatorGem {background: #5E94BF;}
+.action-button {color: #fff; background-color: #5E94BF;border-color: #5E94BF;}
+.action-button:hover {background-color: #7faacc;}
+.action-button:focus, .action-button.focus {color: #fff;background-color: #5E94BF;
+    border-color: #5E94BF;}
+.action-button:active, .action-button.active, .open>.action-button.dropdown-toggle {    color: #fff;    background-color: #5E94BF;    border-color: #5E94BF;}
+.action-button:active:hover, .action-button:active:focus, .action-button:active.focus, .action-button.active:hover, .action-button.active:focus, .action-button.active.focus, .open>.action-button.dropdown-toggle:hover, .open>.action-button.dropdown-toggle:focus, .open>.action-button.dropdown-toggle.focus {    color: #fff;    background-color: #5E94BF;    border-color: #5E94BF;}
+.btnGroupLnd button {border: solid 1px #5E94BF;}
+.btnGroupLnd button.active {background-color: #5E94BF; border-color: #5E94BF;}
+.btnGroupLnd button:hover {background-color:#7faacc;}
+.btnGroupLnd button.active:hover {background-color:#5E94BF;}
+```
+Logo:
+
+![Shiftcrypto logo](img/Theme-cryptosecurity-logo.png)

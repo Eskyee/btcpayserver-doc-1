@@ -41,6 +41,7 @@ Questions and solutions to BTCPay installation.
 * [How can I modify/deactivate environment variables?](FAQ-Deployment.md#How-can-i-modifydeactivate-environment-variables)
 * [Can I start BTCPay only when I'm expecting a payment?](FAQ-Deployment.md#can-i-start-btcpay-only-when-im-expecting-a-payment)
 * [Can I use my existing BTC or LN node with BTCPay?](FAQ-Deployment.md#can-i-use-my-existing-btc-or-ln-node-with-btcpay)
+* [Can I connect to my BTCPay Bitcoin P2P on port 8333?](FAQ-Deployment.md#can-i-connect-to-my-btcpay-bitcoin-p2p-on-port-8333)
 
 ### [Web Deployment FAQ](FAQ-Deployment.md#web-deployment-faq)
 #### [Luna Node Web Deployment FAQ](FAQ-Deployment.md#luna-node-web-deployment-faq)
@@ -75,8 +76,7 @@ Questions about e-commerce and other integrations.
 ### [WooCommerce FAQ](FAQ-Integrations.md#woocommerce-faq-1)
 * [How to configure order status in WooCommerce?](FAQ-Integrations.md#how-to-configure-order-status-in-woocommerce)
 * [How to customize e-mail confirmations in WooCommerce?](FAQ-Integrations.md#how-to-customize-e-mail-confirmations-in-woocommerce)
-* [Error: If you use an alternative order numbering system, please see class-wc-gateway-btcpay.php to apply a search filter
-](FAQ-Integrations.md#error-if-you-use-an-alternative-order-numbering-system-please-see-class-wc-gateway-btcpayphp-to-apply-a-search-filter)
+* [Error: If you use an alternative order numbering system, please see class-wc-gateway-btcpay.php to apply a search filter](FAQ-Integrations.md#error-if-you-use-an-alternative-order-numbering-system-please-see-class-wc-gateway-btcpayphp-to-apply-a-search-filter)
 
 ## [Server Settings FAQ](FAQ-ServerSettings.md)
 
@@ -90,6 +90,7 @@ Common problems and questions server admins have.
 * [Error the BTCPAY_SSHKEYFILE variable is not set/ Unable to update](FAQ-ServerSettings.md#btcpay_sshkeyfile-is-not-set-when-running-the-docker-install-or-unable-to-update-through-server-settings--maintenance)
 * [Forgot BTCPay Admin password](FAQ-ServerSettings.md#forgot-btcpay-admin-password)
 * [How to configure SMTP settings in BTCPay?](FAQ-ServerSettings.md#how-to-configure-smtp-settings-in-btcpay)
+* [How to SSH into my BTCPay running on VPS?](FAQ-ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps)
 
 ### [Theme / Customization FAQ](FAQ-ServerSettings.md#theme--customization-1)
 * [How to customize my BTCPay theme style](FAQ-ServerSettings.md#how-to-customize-my-btcpay-theme-style)
@@ -120,6 +121,8 @@ Store settings explained.
  * [Payment invalid if transactions fails to confirm ... minutes after invoice expiration?](FAQ-Stores.md#payment-invalid-if-transactions-fails-to-confirm--minutes-after-invoice-expiration)
  * [Consider the invoice confirmed when the payment transaction?](FAQ-Stores.md#consider-the-invoice-confirmed-when-the-payment-transaction)
  * [Consider the invoice paid even if the paid amount is ... % less than expected?](FAQ-Stores.md#consider-the-invoice-paid-even-if-the-paid-amount-is---less-than-expected)
+ * [How to disable email on invoices?](FAQ-Stores.md#how-to-disable-email-on-invoices)
+ * [Can I delete invoices from BTCPay?](FAQ-Stores.md#can-i-delete-invoices-from-btcpay)
 
 ## [Wallet FAQ](FAQ-Wallet.md)
 
@@ -145,6 +148,7 @@ Frequent questions about the applications in BTCPay.
 * [How to fix empty spacing around payment button](FAQ-Apps.md#how-to-fix-empty-spacing-around-payment-button)
 * [How to integrate WooCommerce Store in BTCPay Crowdfund app?](FAQ-Apps.md#how-to-integrate-woocommerce-store-into-a-btcpay-crowdfund-app)
 * [How to create Pay button with a custom amount?](FAQ-Apps.md#how-to-create-pay-button-with-a-custom-amount)
+* [How to map a domain name to an app?](FAQ-Apps.md#how-to-map-a-domain-name-to-an-app)
 
 ## [Lightning Network FAQ](FAQ-LightningNetwork.md)
 

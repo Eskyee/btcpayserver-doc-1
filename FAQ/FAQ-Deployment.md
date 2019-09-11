@@ -18,9 +18,10 @@ Here are common questions about installation, regardless of the deployment metho
 * [How do I activate Tor on my BTCPay Server?](FAQ-Deployment.md#how-do-i-activate-tor-on-my-btcpay-server)
 * [How do I disable Tor on my BTCPay Server?](FAQ-Deployment.md#how-do-i-disable-tor-on-my-btcpay-server)
 * [Why activate Tor? Does it mean that nobody knows who I am?](FAQ-Deployment.md#why-activate-tor-does-it-mean-that-nobody-knows-who-i-am)
-* [How can I modify/deactivate environment variables?](FAQ-Deployment.md#How-can-i-modifydeactivate-environment-variables)
+* [How can I modify/deactivate environment variables?](FAQ-Deployment.md#How-can-i-modify-deactivate-environment-variables)
 * [Can I start BTCPay only when I'm expecting a payment?](FAQ-Deployment.md#can-i-start-btcpay-only-when-im-expecting-a-payment)
 * [Can I use my existing BTC or LN node with BTCPay?](FAQ-Deployment.md#can-i-use-my-existing-btc-or-ln-node-with-btcpay)
+* [Can I connect to my BTCPay Bitcoin P2P on port 8333?](FAQ-Deployment.md#can-i-connect-to-my-btcpay-bitcoin-p2p-on-port-8333)
 
 ## Web Deployment FAQ
 ### Luna Node Web Deployment FAQ
@@ -154,7 +155,106 @@ No, you need to keep your BTCPay running at all times so that your Bitcoin node 
 
 ### Can I use my existing BTC or LN node with BTCPay?
 
-It is theoretically possible, but not recommended. Reasons being that it's not documented, making it difficult and time consuming. You would need to understand what docker-compose is doing, watch this [video](https://vimeo.com/316630434). If you are not technically able, it's much easier to use the nodes included in the BTCPay deployment. 
+It is theoretically possible, but not recommended. Reasons being that it's not documented, making it difficult and time consuming. You would need to understand what docker-compose is doing, watch this [video](https://vimeo.com/316630434). If you are not technically able, it's much easier to use the nodes included in the BTCPay deployment.
+
+### Can I connect to my BTCPay Bitcoin P2P on port 8333?
+No, BTCPay's Bitcoin core node is not exposed externally. For BTCPay purposes, it is not in the interest of the user, as it increases bandwidth requirement. BTCPay is also whitebinding connections to this port, so opening it would expose the node to potential DDoS.
+
+### Can I use an existing Nginx server as a reverse proxy with SSL termination?
+
+Yes you can! Just make sure to use the proper configuration.
+
+Create an extra config file for your vhost in `/etc/nginx/sites-available/btcpayserver` and create a symlink for this file at `/etc/nginx/sites-enabled/btcpayserver`
+
+The contents of this vhost file should look like this:
+```
+server {
+	listen 80;
+
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+
+	# Put your domain name here
+	server_name btcpay.domain.com;
+
+	# Needed for Let's Encrypt verification
+	location ~ /.well-known {
+		allow all;
+	}
+
+	# Force HTTP to HTTPS
+	location / {
+		return 301 https://$http_host$request_uri;
+	}
+}
+
+server {
+	listen 443 ssl http2;
+
+	ssl on;
+        
+	# SSL certificate by Let's Encrypt in this Nginx (not using Let's Encyrpt that came with BTCPay Server Docker)
+	ssl_certificate      /etc/letsencrypt/live/btcpay.domain.com/fullchain.pem;
+	ssl_certificate_key  /etc/letsencrypt/live/btcpay.domain.com/privkey.pem;
+
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+
+	# Put your domain name here
+	server_name btcpay.domain.com;
+
+	# Route everything to the real BTCPay server
+	location / {
+		# URL of BTCPay Server (i.e. a Docker installation with REVERSEPROXY_HTTP_PORT set to 10080)
+		proxy_pass http://127.0.0.1:10080;
+
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+		# For websockets (used by Ledger hardware wallets)
+		proxy_set_header Upgrade $http_upgrade;
+	}
+
+	# Needed for Let's Encrypt verification
+	location ~ /.well-known {
+		allow all;
+	}
+}
+
+```
+
+Also, put the following in your main Nginx config file at `/etc/nginx/nginx.conf`:
+
+```
+http {
+
+	# ... # Existing stuff 
+	
+	# Needed to allow very long URLs to prevent issues while signing PSBTs
+	server_names_hash_bucket_size 128;
+	proxy_buffer_size          128k;
+	proxy_buffers              4 256k;
+	proxy_busy_buffers_size    256k;
+	client_header_buffer_size 500k;
+	large_client_header_buffers 4 500k;
+	http2_max_field_size       500k;
+	http2_max_header_size      500k;
+
+	# Needed websocket support (used by Ledger hardware wallets)
+	map $http_upgrade $connection_upgrade {
+    	default upgrade;
+    	''      close;
+	}
+	
+}
+```
+
+Now test your Nginx config with `service nginx configtest` and reload the config with `service nginx reload`.
+
+Notice: If your BTCPay Server install has more than one domain (for example `WOOCOMMERCE_HOST` or `BTCPAY_ADDITIONAL_HOSTS`) you will need to modify your config for each domain name. The example above only covers 1 domain name called `btcpay.domain.com`.
+
 
 ## Web-deployment
 
@@ -205,7 +305,10 @@ server_names_hash_bucket_size 128;
 proxy_buffer_size          128k;
 proxy_buffers              4 256k;
 proxy_busy_buffers_size    256k;
-http2_max_field_size       32k;
+client_header_buffer_size 500k;
+large_client_header_buffers 4 500k;
+http2_max_field_size       500k;
+http2_max_header_size      500k;
 ```
 
 If your reverse proxy is Apache 2, you need to set those two settings
@@ -216,4 +319,11 @@ If your reverse proxy is Apache 2, you need to set those two settings
     ProxyPreserveHost on
 ...
 </VirtualHost>
+```
+
+You will also need those settings in the `apache2.conf` to prevent issues while signing PSBTs.
+
+```
+LimitRequestLine 500000
+LimitRequestFieldSize 500000
 ```
