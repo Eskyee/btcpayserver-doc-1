@@ -10,7 +10,9 @@ This document covers all the questions and issues related to Server Settings. Th
 * [What is BTCPay SSH key file](FAQ-ServerSettings.md#what-is-btcpay-ssh-key-file)
 * [Error the BTCPAY_SSHKEYFILE variable is not set/ Unable to update](FAQ-ServerSettings.md#btcpay_sshkeyfile-is-not-set-when-running-the-docker-install-or-unable-to-update-through-server-settings--maintenance)
 * [Forgot BTCPay Admin password](FAQ-ServerSettings.md#forgot-btcpay-admin-password)
+* [How to disable U2F and 2FA for a user](FAQ-ServerSettings.md#how-to-disable-u2f-and-2fa-for-a-user)
 * [How to configure SMTP settings in BTCPay?](FAQ-ServerSettings.md#how-to-configure-smtp-settings-in-btcpay)
+* [How to SSH into my BTCPay running on VPS?](FAQ-ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps)
 
 ## Theme / Customization
 * [How to customize my BTCPay theme style](FAQ-ServerSettings.md#how-to-customize-my-btcpay-theme-style)
@@ -33,59 +35,60 @@ This document covers all the questions and issues related to Server Settings. Th
 ### How to update BTCPay Server
 
 There are 2 ways to update your BTCPay Server :
-- Updating through the front end: Server Settings > Maintenance > Update.
+1. Updating through the front end: Server Settings > Maintenance > Update.
 
 ![Updating BTCPay Server](/img/HowToUpdateBTCPayServer.png)
 
-- Updating through SSH: Login into your virtual machine with ssh, then apply following commands:
+2.Updating through SSH: Login into your virtual machine with ssh, then apply following commands:
+
 ```
 sudo su -
 btcpay-update.sh
 ```
+
 ### How can I see my BTCPay version?
 You can see your BTCPay version in the bottom right of the page footer when you're logged in as a server admin.
+
 ### How can I check my BTCPay Server version via terminal?
 In the btcpayserver-docker folder:`bitcoin-cli.sh getnetworkinfo`
+
 ### What is BTCPay SSH key file?
 BTCPay SSH key, enables users to update their server or quickly change the domain name from btcpay website, the front-end.
-### Forgot BTCPay Admin password?
-You need to edit your database.
 
-First, register new user, for example: "newadmin@example.com".
-If you can't create a new user because registrations are disabled, you reset your Policies settings with the following command line, please skip this step if you could create a new user.
+### Forgot BTCPay Admin password?
+First, register a new user on your BTCPay Server, by clicking "Register", for example: "newadmin@example.com".
+
+If you can't create a new user because registrations are disabled in your Server Settings > Policies, you need to reset the policies settings. Please skip this step if you can create a new user on the front-end home page using the register button. Run the following command (It also deletes any other server settings currently being used): 
 
 ```bash
 # In root
 sudo su -
-# Connect to your postgres container
-docker exec -ti $(docker ps -a -q -f "name=postgres_1") bash
-# Switch to postgres user
-su postgres
-# Run psql
-psql
-# Connect to db
-\c btcpayservermainnet
-DELETE FROM "Settings" WHERE "Id" = 'BTCPayServer.Services.PoliciesSettings';
+cd $BTCPAY_BASE_DIRECTORY/btcpayserver-docker/
+# Re-open registrations
+./btcpay-admin.sh reset-server-policy
 ```
 
-Then, add `newadmin@example.com` as an admin:
+Head back to your BTCPay Server and click on the "Register" button which should now be enabled. In case you don't see the Register link in the menu, that's probably because of the caching. Restart your btcpay with `btcpay-restart.sh`.
 
+Next, add the newly registered user `newadmin@example.com` as an admin:
 ```bash
-# In root
-sudo su -
-# Connect to your postgres container
-docker exec -ti $(docker ps -a -q -f "name=postgres_1") bash
-# Switch to postgres user
-su postgres
-# Run psql
-psql
-# Connect to db
-\c btcpayservermainnet
-INSERT INTO "AspNetUserRoles" Values ( (SELECT "Id" FROM "AspNetUsers" WHERE "Email"='newadmin@example.com'), (SELECT "Id" FROM "AspNetRoles" WHERE "NormalizedName"='SERVERADMIN'));
+# Set new user as admin
+./btcpay-admin.sh set-user-admin newadmin@example.com
 ```
 Now you can access with `newadmin@example.com` as admin.
 
 When you apply the changes, you'll noticed that newly created user isn't the member of any stores. In that case, [follow this guide](https://gist.github.com/justinmoon/8128e66fc11d90ae5732f2491570bfc5) to add the new users to all or certain stores.
+
+### How to disable U2F and 2FA for a user
+Remove U2F and 2FA settings for a registered user, for example `user@example.com` with the following commands:
+
+```bash
+# In root
+sudo su -
+cd $BTCPAY_BASE_DIRECTORY/btcpayserver-docker/
+# Disable U2F and 2FA
+./btcpay-admin.sh disable-multifactor user@example.com
+```
 
 ## BTCPAY_SSHKEYFILE is not set when running the docker install, or unable to update through Server Settings / Maintenance
 
@@ -108,7 +111,7 @@ sudo su -
 cd $BTCPAY_BASE_DIRECTORY/btcpayserver-docker
 git checkout master
 # Setup SSH access via private key
-ssh-keygen -t rsa -f /root/.ssh/id_rsa_btcpay -q -P ""
+ssh-keygen -t rsa -f /root/.ssh/id_rsa_btcpay -q -P "" -m PEM
 echo "# Key used by BTCPay Server" >> /root/.ssh/authorized_keys
 cat /root/.ssh/id_rsa_btcpay.pub >> /root/.ssh/authorized_keys
 BTCPAY_HOST_SSHKEYFILE=/root/.ssh/id_rsa_btcpay
@@ -125,6 +128,10 @@ SMTP Username: (your Gmail username)
 SMTP Password: (your Gmail password)
 ```
 If by any chance you have 2-step verification added to your gmail account, [visit this article](https://support.google.com/mail/answer/185833?hl=en).
+
+### How to SSH into my BTCPay running on VPS?
+Follow these instructions to connect via [SSH into your virtual machine](https://github.com/JeffVandrewJr/patron/blob/master/SSH.md).
+
 ## Theme / Customization
 
 ### How to customize my BTCPay theme style
@@ -161,6 +168,4 @@ If you do not see Full node P2P in your Services, you probably have to [activate
 ## Files
 
 ### How to upload files to BTCPay
-To upload files to your BTCPay Server instance, first under Server Settings > Services, enable the External Storage feature and choose which storage service provider you would like to use. Next, go to Server Settings > Files to browse and upload local files. 
-
-Store files for use with BTCPay in Apps > Settings. You can also use the Get Temp Link feature to create temporary URLs and even enable file downloading. Note that temporary file links cannot be created with the FileStorage system type. Depending on the limitations of your storage system, you may have difficulty uploading large files. 
+To upload files to your BTCPay Server instance, first under Server Settings > Services, enable the External Storage feature and choose which storage service provider you would like to use. Next, go to Server Settings > Files to browse and upload local files. Depending on the limitations of your storage system, you may have difficulty uploading large files. 
