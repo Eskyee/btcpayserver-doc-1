@@ -21,15 +21,15 @@ The docker deployment will provide you easy update system and make sure that all
 
 ## Typical manual installation
 
-This steps have been done on ubuntu 16.04, adapt for your own install.
+This steps have been done on Ubuntu 18.04, adapt for your own install.
 
 
-### 1) Install Bitcoin Core 0.17.0
+### 1) Install Bitcoin Core 0.19.1
 
 ```bash
-BITCOIN_VERSION="0.17.0"
-BITCOIN_URL="https://bitcoincore.org/bin/bitcoin-core-0.17.0/bitcoin-0.17.0-x86_64-linux-gnu.tar.gz"
-BITCOIN_SHA256="9d6b472dc2aceedb1a974b93a3003a81b7e0265963bd2aa0acdcb17598215a4f"
+BITCOIN_VERSION="0.19.1"
+BITCOIN_URL="https://bitcoin.org/bin/bitcoin-core-0.19.1/bitcoin-0.19.1-x86_64-linux-gnu.tar.gz"
+BITCOIN_SHA256="5fcac9416e486d4960e1a946145566350ca670f9aaba99de6542080851122e4c"
 
 # install bitcoin binaries
 cd /tmp
@@ -40,15 +40,15 @@ sudo tar -xzvf bitcoin.tar.gz -C /usr/local/bin --strip-components=2 "bitcoin-$B
 rm bitcoin.tar.gz
 ```
 
-### 2) Install .NET Core SDK 2.1
-On my ubuntu 16.04 (See [those instructions](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/sdk-2.1.505) for different OS).
+### 2) Install .NET Core SDK 3.1
+On my ubuntu 18.04 (See [these instructions](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1804) or [here](https://dotnet.microsoft.com/download) for different OS).
 
 ```bash
-wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 sudo apt-get update
-sudo apt-get install -y dotnet-sdk-2.1
+sudo apt-get install -y dotnet-sdk-3.1
 ```
 
 ### 3) Install NBXplorer

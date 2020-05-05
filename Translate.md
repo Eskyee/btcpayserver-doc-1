@@ -13,7 +13,7 @@ If you have any questions about translating, join the [#Translations channel](ht
   * Step 2: Find Your Language-Country Code
   * Step 3: New Language Translation
   * Translation Tips
-  * View:  [Checkout Page](https://store.demo.btcpayserver.org/) For Reference
+  * View:  [Checkout Page](https://store.btcpayserver.org/) For Reference
 
 ----
 
@@ -58,11 +58,20 @@ They should not be translated, but they need to remain in the correct place in y
     Japanese Example:
      "Return to StoreName" translates to "{{storeName}} に戻る"
 
+### **Notifications**
+To stay up to date with new strings - enable alerts for new strings needing to be translated by enabling the watch language feature in Transifex. 
+
+Click on the eye" icon (in red in the following screenshot).
+
+![Transifex Alerts](img/transifex-alert.png)
+
+You have to click it for the each project you wish to follow.
+
 ----
 
 ## View Checkout Page For Reference
 
 Need context for a string?
 
-Visit the BTCPay Server demo store [checkout page](https://store.demo.btcpayserver.org/). 
+Visit the BTCPay Server demo store [checkout page](https://store.btcpayserver.org/). 
 

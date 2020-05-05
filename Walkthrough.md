@@ -4,7 +4,7 @@ In this article, we will walk you through the BTCPay user interface and show you
 
 Watch video below for an interactive overview of the features.
 
-[![Walkthrough](https://img.youtube.com/vi/ZIfJyq9RimM/mqdefault.jpg)](https://www.youtube.com/watch?v=ZIfJyq9RimM "BTCPay - WalkThrough")
+[![Walkthrough](img/thumbnails/BTCPayServerWalkthourgh.png)](https://www.youtube.com/watch?v=ZIfJyq9RimM "BTCPay - WalkThrough")
 
 After you created the account on the BTCPay Server instance hosted by yourself or a third-party, you'll see a variety of options in the navigation menu on top.
 
@@ -37,15 +37,15 @@ Server settings is something only a server admin can access. If you're using som
 Inside BTCPay you can create and manage an unlimited number of stores. Each store has its own wallet, can create apps (Point of Sale or Payment Buttons and Crowdfunds) or be paired with external e-commerce software through one of the [integrations](https://docs.btcpayserver.org/integrations/) available. Admin does not have control over the private keys of the other user's stores. For more information, check [Stores FAQ](/FAQ/FAQ-Stores.md)
 
 - General settings - Configure individual store settings, set up derivation scheme for your wallet and adjust the number of confirmations or invoice expiration time, etc. Server admins can enable Lightning Network payments.
-- Rates - Set the source for cryptocurrency to fiat rates for your store.
+- Rates - Set the source for cryptocurrency to fiat [exchange rates for your store](/FAQ/FAQ-Stores.md#how-to-change-the-exchange-rate-provider-for-invoices).
 - Checkout experience - [Customize the appearance](/FAQ/FAQ-ServerSettings.md#how-to-modify-the-checkout-page) of the checkout page, choose default coin, etc.
-- Access Tokens - Tokens for [pairing the store to an integration](GettingStarted.md#connecting-your-btcpay-store-to-your-e-commerce-platform)
-- Users - Enable other users with a registered BTCPay account to access your store as either guest or owner. 
-- Pay Button - [Create a payment button](GettingStarted.md#creating-the-pay-button) you can easily embed into your website.
+- Access Tokens - Tokens for [pairing the store to an integration](WhatsNext.md#connecting-your-btcpay-store-to-your-e-commerce-platform)
+- Users - Enable other users with a registered BTCPay account to access your store as either guest or owner.
+- Pay Button - [Create a payment button](WhatsNext.md#creating-the-pay-button) you can easily embed into your website.
 
 ## Apps
 
-Each store has access to different apps. Applications built on top of BTCPay extend the [use case](UseCase.md) of the software and cater to different type of users. Here you can create a new app and connect it to the store and customize it. A good example is [Point of Sale app](GettingStarted.md#creating-the-point-of-sale-app) you can use to receive payments in physical stores or even donations.
+Each store has access to different apps. Applications built on top of BTCPay extend the [use case](UseCase.md) of the software and cater to different type of users. Here you can create a new app and connect it to the store and customize it. A good example is the Point of Sale app which you can use to receive payments in physical stores or even donations.
 
 For more information, check [Apps](Apps.md) or [Apps FAQ](/FAQ/FAQ-Apps.md)
 

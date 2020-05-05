@@ -6,9 +6,9 @@ Their web-wizard is one of the easiest ways to deploy BTCPay Servers from a very
 
 Video bellow explains all the step and customization of BTCPay.
 
-[![LunaNodeWebWizzard](https://img.youtube.com/vi/NjslXYvp8bk/mqdefault.jpg)](https://www.youtube.com/watch?v=NjslXYvp8bk "BTCPay - LunaNode Web-Deployment")
+[![LunaNodeWebWizzard](img/thumbnails/BTCPayServerLunaNode1click.png)](https://www.youtube.com/watch?v=NjslXYvp8bk "BTCPay - LunaNode Web-Deployment")
 
-The instalation is also covered in [this article](https://medium.com/@BtcpayServer/launch-btcpay-server-via-web-interface-and-deploy-full-bitcoin-node-lnd-in-less-than-a-minute-dc8bc6f06a3)
+The installation is also covered in [this article](https://medium.com/@BtcpayServer/launch-btcpay-server-via-web-interface-and-deploy-full-bitcoin-node-lnd-in-less-than-a-minute-dc8bc6f06a3)
 
 The third video covers setting BTCPay up on LunaNode, but also goes in-depth on setting up wallets, store and apps.
 
@@ -16,7 +16,7 @@ The third video covers setting BTCPay up on LunaNode, but also goes in-depth on 
 
 ## 1. Create the account and add credits
 
-Register to LunaNode and add credits to your account. The process is quite straight-Forward. If by any chance you get stuck, [see this article](https://bitcoinshirt.co/how-to-create-store-accept-bitcoin/8/#Creating-an-account). Wait for your invoice confirmation.
+Register to LunaNode and add credits to your account. The process is quite straight-Forward. If by any chance you get stuck, [see this article](https://bitcoinshirt.co/how-to-create-store-accept-bitcoin/8/#Creating-an-account). Wait for the invoice confirmation.
 
 ## 2. Create the API Key
 
@@ -31,4 +31,4 @@ Once your account has been verified, and credits added, go to the API section an
 5. Click Launch VM. Wait 6-7 minutes for Virtual Machine deployment.
 6. Visit the domain.
 
-Now you need to wait for blockchain to sync fully. Depending on the plan you used and the number of coins you added, that can take 1-7 days. If you enable CPU utilization, with Bitcoin and LND, it will take 3 days. There is a US$ 3 one-time charge for faster sync if you enable the CPU utilization. The sync pop-up window will disappear when your node fully syncs.
+Now you need to wait for blockchain to sync fully. Depending on the plan you used and the number of coins you added, that can take 1-7 days. If you enable CPU utilization, with Bitcoin and LND, it will take 1-2 days. There is a US$ 3 one-time charge for faster sync if you enable the CPU utilization. The sync pop-up window will disappear when your node fully syncs.

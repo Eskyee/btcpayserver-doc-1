@@ -350,8 +350,8 @@ The gateway to the Bitcoin network for BTCPay Server components.
 
 ##### 1. Download the latest binaries from a trusted source such as [https://bitcoincore.org/en/download/](https://bitcoincore.org/en/download/).
 ```bash
-~$ wget https://bitcoincore.org/bin/bitcoin-core-0.18.0/bitcoin-0.18.0-x86_64-linux-gnu.tar.gz
-~$ wget https://bitcoincore.org/bin/bitcoin-core-0.18.0/SHA256SUMS.asc
+~$ wget https://bitcoincore.org/bin/bitcoin-core-0.19.1/bitcoin-0.19.1-x86_64-linux-gnu.tar.gz
+~$ wget https://bitcoincore.org/bin/bitcoin-core-0.19.1/SHA256SUMS.asc
 ```
 ##### 2. Verify the authenticity of the downloads.
 The Bitcoin Core code signing key is currently:
@@ -366,15 +366,15 @@ It's advisable to double check the signing key corresponds with other available 
 ~$ gpg --verify SHA256SUMS.asc
  gpg: Good signature from "Wladimir J. van der Laan (Bitcoin Core binary release signing key) <laanwj@gmail.com>" [unknown]
 ~$ sha256sum --ignore-missing -c SHA256SUMS.asc
- bitcoin-0.18.0-x86_64-linux-gnu.tar.gz: OK
+ bitcoin-0.19.1-x86_64-linux-gnu.tar.gz: OK
 ```
 ##### 3. Install the binaries.
 
 ```bash
-~$ tar zxf bitcoin-0.18.0-x86_64-linux-gnu.tar.gz
-~$ pushd bitcoin-0.18.0/bin; sudo cp bitcoind bitcoin-cli /usr/bin; popd;
+~$ tar zxf bitcoin-0.19.1-x86_64-linux-gnu.tar.gz
+~$ pushd bitcoin-0.19.1/bin; sudo cp bitcoind bitcoin-cli /usr/bin; popd;
 ~$ bitcoind --version
-Bitcoin Core Daemon version v0.18.0
+Bitcoin Core version v0.19.1
 ```
 ##### 4. Create the configuration file.
 An example configuration file is available on the Bitcoin Core repository at https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf.
@@ -556,16 +556,16 @@ NBXplorer is a dotnet core application that monitors the Bitcoin blockchain for 
 ##### 🚚 Install
 
 ##### 1. Install dotnet core
-Check [download link for latest version](https://dotnet.microsoft.com/download/dotnet-core) (.Net Core 2.2 at the time of writing)
+Check [download link for latest version](https://dotnet.microsoft.com/download/dotnet-core) (.Net Core 3.1 at the time of writing)
 ```bash
 ~$ wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 ~$ sudo dpkg -i packages-microsoft-prod.deb
 ~$ sudo add-apt-repository universe
 ~$ sudo apt-get install apt-transport-https
 ~$ sudo apt-get update
-~$ sudo apt-get install dotnet-sdk-2.2
-~$ dotnet --version
-2.2.203
+~$ sudo apt-get install dotnet-sdk-3.1
+~$ dotnet --version 
+3.1.1
 ```
 ##### 2. Build NBXplorer
 ```bash
@@ -574,7 +574,7 @@ Check [download link for latest version](https://dotnet.microsoft.com/download/d
 ~/src$ cd NBXplorer
 ~/src/NBXplorer$ ./build.sh
 ```
-##### 3. Create a systemd service.
+##### 3. Create a systemd service
 An example systemd service file is shown below. Adjust the paths, User and Group accordingly.
 ```bash
 ~$ vi nbxplorer.service

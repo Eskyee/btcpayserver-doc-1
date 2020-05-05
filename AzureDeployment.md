@@ -4,8 +4,6 @@ This setup is similar to the [Docker Deployment](DockerDeployment.md), except th
 
 ## One-click setup
 
-Azure is currently the fastest and easiest way to set up BTCPayServer.
-
 Start by clicking the following button:
 
 [![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbtcpayserver%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
@@ -14,7 +12,7 @@ You can log into [Azure](https://azure.microsoft.com/en-us/account/) with your M
 
 Final installation steps:
 
-* Fill in the remaining options: ![Azure Resource Config](img/AzureResourceConfig.png)
+Fill in the remaining options: ![Azure Resource Config](img/AzureResourceConfig.png)
 * Click 'Purchase' to confirm
 * (Wait for Azure deployment)
 * Type `ip` into the search bar and select the first option, `BTCPayServerPublicIP`
@@ -35,5 +33,7 @@ For advanced users, you can connect via SSH with the information on `https://EXA
 Approximate Cost (unpruned, Bitcoin-only, after Azure $200 free trial): **60 USD per month**
 
 After all your nodes have synced and you've confirmed everything works, follow [this guide](https://github.com/btcpayserver/btcpayserver-doc/blob/master/AzurePennyPinching.md) to fine-tune for savings; costs should drop to **30 or 40 USD per month**.
+
+[![BTCPay - Azure](img/thumbnails/BTCPayServerAzureDeployment.png)](http://www.youtube.com/watch?v=xh3Eac66qc4 "BTCPay - Azure 1-Click")
 
 Learn more: [btcpayserver/btcpayserver-azure](https://github.com/btcpayserver/btcpayserver-azure)

@@ -6,17 +6,21 @@ Business deployment methods can vary by setup, maintenance, support, price, etc.
 
 BTCPay is a non-custodial invoicing system which eliminates the involvement of a third-party when managing funds. Payments with BTCPay go directly to your wallet. Your private keys are never uploaded to the server. Meaning 3rd Party BTCPay hosts do not control user funds, they are simply hosting your instance of the BTCPay software for you.
 
-Developer deployments are not recommended for production environments and require the user to have technical knowledge related to the build. 
+Developer deployments are not recommended for production environments and require the user to have technical knowledge related to the build.
+
+![Decision diagram](img/DecisionDiagInstallBTCPayServer.png)
 
 ## What are my options?
 
-* [Web Deployment](LunaNodeWebDeployment.md)
-* [Azure Deployment](AzureDeployment.md)
+* [LunaNode Web Deployment](LunaNodeWebDeployment.md) *
+* [Azure Deployment](AzureDeployment.md) *
 * [Docker Deployment](DockerDeployment.md)
-* [Google Cloud Deployment](GoogleCloudDeployment.md)
-* [Hardware Deployment](HardwareDeployment.md)
+* [Google Cloud Deployment](GoogleCloudDeployment.md) *
+* [Hardware Deployment](HardwareDeployment.md) *
 * [Third-Party Hosting](ThirdPartyHosting.md)
 * [Manual Deployment](ManualDeployment.md)
+
+(*): Those deployments are using the Docker Deployment under the hood.
 
 ## To chose one that will best suit your needs, consider the following:
 
@@ -27,7 +31,7 @@ Developer deployments are not recommended for production environments and requir
 |Business<br>(Fast Setup)                  |[3rd Party <br> BTCPay Hosts](ThirdPartyHosting.md)  |[LunaNode <br> Web-Wizard](LunaNodeWebDeployment.md)* |- Low Difficulty<br>- BTCPayServer Support (1)<br>- Lightning Network (2)     |
 |Cost / Month                                     | Free                    | $10 |BTC Accepted  |
 
-**LunaNode Web-Wizard is a VPS solution, deployable from an easy-web interface.*
+**LunaNode Web-Wizard is a VPS solution, deployable from an easy-web interface.**
 
 <br>
 
