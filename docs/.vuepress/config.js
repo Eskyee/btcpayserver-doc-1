@@ -1,6 +1,6 @@
 const { resolve } = require('path')
 const implicitFigures = require('markdown-it-implicit-figures')
-
+const slugify = require('./slugify')
 const preprocessMarkdown = resolve(__dirname, 'preprocessMarkdown')
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
     // Styles
     ["link", { rel: "stylesheet", href: "/styles/btcpayserver-variables.css" }]
   ],
-  chainWebpack (config, isServer) {
+  chainWebpack (config) {
     config.module
       .rule('md')
       .test(/\.md$/)
@@ -37,13 +37,13 @@ module.exports = {
       backgroundTransition: false,
       staticIcon: true
     }],
-    ['vuepress-plugin-medium-zoom', {
-    }]
+    ['@vuepress/medium-zoom']
   ],
   markdown: {
     extendMarkdown (md) {
       md.use(implicitFigures)
-    }
+    },
+    slugify
   },
   themeConfig: {
     logo: "/img/btcpay-logo.svg",
@@ -51,13 +51,14 @@ module.exports = {
     repo: "btcpayserver/btcpayserver-doc",
     docsDir: "docs",
     editLinks: true,
+    notSatisfiedLinks: true, // our own addition, see theme/components/PageEdit.vue
     sidebarDepth: 0,
     algolia: {
       indexName: 'btcpayserver',
       apiKey: '6a3a4c4380385cb5c9f9070247fdfca6',
       // See https://www.algolia.com/doc/api-reference/api-parameters/
       algoliaOptions: {
-        hitsPerPage: 25
+        hitsPerPage: 10
       },
       // See https://community.algolia.com/docsearch/behavior.html#autocompleteoptions
       autocompleteOptions: {
@@ -67,11 +68,13 @@ module.exports = {
     nav: [
       {
         text: "Website",
-        link: "https://btcpayserver.org/"
+        link: "https://btcpayserver.org/",
+        rel: "noopener noreferrer website"
       },
       {
         text: "Chat",
-        link: "https://chat.btcpayserver.org/"
+        link: "https://chat.btcpayserver.org/",
+        rel: "noopener noreferrer chat"
       },
       {
         text: "GitHub",
@@ -107,7 +110,6 @@ module.exports = {
             path: "/Docker/",
             collapsable: false,
             children: [
-              // TODO: Add Configurator
               {
                 title: "Web Deployment",
                 path: "/LunaNodeWebDeployment"
@@ -135,6 +137,10 @@ module.exports = {
                       ["/DynamicDNS", "Dynamic DNS"],
                       ["/ReverseSSHtunnel", "Reverse SSH Tunnel"]
                     ]
+                  },
+                  {
+                    title: "Hardware As A Service",
+                    path: "/HardwareAsAService"
                   }
                 ]
               },
@@ -153,9 +159,12 @@ module.exports = {
                     title: "Transmuter",
                     path: "/Transmuter/",
                     children: [
+                      ["/Transmuter/DCA", "Dollar Cost Average Preset"],
                       ["/Transmuter/EmailReceiptsPreset", "Email Receipts Preset"]
                     ]
                   },
+                  ["/ElectrumX", "Electrum X"],
+                  ["/ElectrumPersonalServer", "Electrum Personal Server"],
                   "/Docker/pihole"
                 ]
               }
@@ -167,6 +176,10 @@ module.exports = {
             children: [
               "/ManualDeploymentExtended"
             ]
+          },
+          {
+            title: "Configurator",
+            path: "/Configurator/"
           }
         ]
       },
@@ -180,10 +193,11 @@ module.exports = {
             title: "(3) Wallet Setup",
             path: "/WalletSetup",
             collapsable: false,
+            initialOpenGroupIndex: -1,
             children: [
               {
                 title: "Use existing hardware wallet",
-                path: "/Vault",
+                path: "/HardwareWalletIntegration",
                 children: [
                   ["/ColdCardWallet", "ColdCard Wallet"]
                 ]
@@ -194,10 +208,6 @@ module.exports = {
                   {
                     title: "Electrum Wallet",
                     path: "/ElectrumWallet",
-                    children: [
-                      ["/ElectrumX", "Electrum X"],
-                      ["/ElectrumPersonalServer", "Electrum Personal Server"]
-                    ]
                   },
                   ["/WasabiWallet", "Wasabi Wallet"]
                 ]
@@ -221,6 +231,13 @@ module.exports = {
           ["/Apps", "Apps"],
           ["/Wallet", "Wallet"],
           ["/Invoices", "Invoices"],
+          {
+            title: "Pull Payments",
+                path: "/PullPayments",
+                children: [
+                  ["/Refund", "Refunds"]
+            ]
+          },
           ["/PaymentRequests", "Payment Requests"],
           ["/LightningNetwork", "Lightning Network"],
           ["/Accounting", "Accounting"],
@@ -228,7 +245,7 @@ module.exports = {
             title: "Payjoin",
             path: "/Payjoin",
             children: [
-              ["/Payjoin-spec", "Payjoin Specification"]
+              ["https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki", "Payjoin specification", { type: 'external' }]
             ]
           }
         ]
@@ -238,6 +255,7 @@ module.exports = {
         collapsable: false,
         children: [
           ["/WooCommerce", "WooCommerce"],
+          ["/Shopify", "Shopify"],
           ["/Drupal", "Drupal"],
           ["/Magento", "Magento"],
           ["/PrestaShop", "PrestaShop"],
@@ -247,6 +265,7 @@ module.exports = {
       {
         title: "Support and Community",
         collapsable: false,
+        initialOpenGroupIndex: -1,
         children: [
           {
             title: "FAQ and common issues",
@@ -266,8 +285,32 @@ module.exports = {
           },
           ["/Troubleshooting", "Troubleshooting an issue"],
           ["/Support", "Support"],
-          ["/Contribute", "Contribute"],
-          ["/Translate", "Translate"],
+          {
+            title: "Contribute to BTCPay Server",
+            path: "/Contribute",
+            children: [
+              {
+                title: "Develop",
+                path: "/Contribute/ContributeDev/",
+                 children: [
+                   ["/Contribute/ContributeDev/ContributeDevCode", "Code"],
+                   ["/Contribute/ContributeDev/ContributeDevTest", "Test"]
+                 ]
+              },
+              {
+                title: "Write",
+                path: "/Contribute/ContributeWrite/",
+                 children: [
+                   ["/Contribute/ContributeWrite/WriteSoftware", "Software Stack"],
+                   ["/Contribute/ContributeWrite/WriteDocs", "Documentation"],
+                   ["/Contribute/ContributeWrite/WriteBlog", "Blog"]
+                 ]
+              },
+              ["/Contribute/ContributeDesign", "Design"],
+              ["/Contribute/ContributeTranslate", "Translate"],
+              ["/Contribute/ContributeMisc", "Miscellaneous"],
+            ]
+          },
           ["/Community", "Community"]
         ]
       },
@@ -278,7 +321,10 @@ module.exports = {
           ["/Architecture", "Architecture"],
           ["/LocalDevelopment", "Developing Locally"],
           ["/Altcoins", "How to add an Altcoin"],
-          ["/Theme", "Customizing Themes"]
+          ["/Theme", "Customizing Themes"],
+          ["https://docs.btcpayserver.org/API/Greenfield/v1", "Greenfield API v1", { type: 'external' }],
+          ["/GreenFieldExample", "Greenfield example with cURL"],
+          ["/BTCPayServer/Security", "Security Disclosures"],
         ]
       }
     ]

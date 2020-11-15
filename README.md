@@ -14,7 +14,7 @@ Please check out our [official website](https://btcpayserver.org/), our [complet
 
 ## Contributing
 
-Pull requests are welcome and appreciated. To contribute to BTCPay Server, first check the [contributing guidelines](docs/Contribute.md).
+Pull requests are welcome and appreciated. To contribute to BTCPay Server, first check the [contributing guidelines](docs/Contribute/README.md).
 
 If you're beginner, take a look at the step by step guide on how to contribute to BTCPay Server documentation below.
 
@@ -23,15 +23,16 @@ If you're beginner, take a look at the step by step guide on how to contribute t
 ### Build the Documentation Locally
 
 In order to build the website locally, you'll need [Node.js](https://nodejs.org/) >= 12.16 (or basically the latest LTS version).
+A prerequisite for the `setup-deps.sh` script is [jq](https://stedolan.github.io/jq/).
 
 The setup is straight forward:
 
 ```bash
-# Link external doc repos
-./setup-deps.sh
-
 # Install dependencies
 npm install
+
+# Link external doc repos
+./setup-deps.sh
 
 # Serve locally (by default on port 8080)
 npm start
@@ -96,6 +97,12 @@ curl -X POST https://api.github.com/repos/btcpayserver/btcpayserver-doc/dispatch
 
 The `GH_PAT` needs to be a [personal access token](https://help.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token).
 
+### Check for broken links
+
+The GitHub Actions pipeline checks for broken links after deploying the production site.
+You can also run the link check locally using `npm run linkcheck:local`.
+The dev server needs to be running alongside for this to work.
+
 ## Supporters
 
 The BTCPay Server Project is proudly supported by these entities through the [BTCPay Server Foundation](https://foundation.btcpayserver.org/).
@@ -103,53 +110,69 @@ The BTCPay Server Project is proudly supported by these entities through the [BT
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
+      <td align="center" valign="middle">
+        <a href="https://kraken.com" target="_blank">
+          <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/kraken.svg?sanitize=true" alt="Kraken" height=100>
+          <br/>
+          <span>Kraken</span>
+        </a>
+      </td>
+      <td align="center" valign="middle">
         <a href="https://twitter.com/sqcrypto" target="_blank">
           <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/squarecrypto.svg?sanitize=true" alt="Square Crypto" height=100>
           <br/>
           <span>Square Crypto</span>
         </a>
       </td>
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
+      <td align="center" valign="middle">
         <a href="https://www.btse.com" target="_blank">
-          <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/btse.svg?sanitize=trueg" alt="BTSE" height=100>
+          <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/btse.svg?sanitize=true" alt="BTSE" height=100>
           <br/>
           <span>BTSE</span>
         </a>
       </td>
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
+      <td align="center" valign="middle">
+        <a href="https://www.okcoin.com/" target="_blank">
+          <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/okcoin.svg?sanitize=true" alt="OKCoin" height=100>
+          <br/>
+          <span>OKCoin</span>
+        </a>
+      </td>
+      <td align="center" valign="middle">
         <a href="https://www.dglab.com/en/" target="_blank">
           <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/dglab.svg?sanitize=true" alt="DG Lab" height=100>
           <br/>
           <span>DG Lab</span>
         </a>
-      </td>  
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
-        <a href="https://www.okcoin.com//" target="_blank">
-          <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/okcoin.svg?sanitize=true" alt="DG Lab" height=100>
-          <br/>
-          <span>OKCoin</span>
-        </a>
-      </td>  
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
+      </td>
+    </tr>
+    <tr>
+       <td align="center" valign="middle">
         <a href="https://acinq.co/" target="_blank">
           <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/acinq-logo.svg?sanitize=true" alt="ACINQ" height=100>
           <br/>
           <span>ACINQ</span>
         </a>
       </td>
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
+      <td align="center" valign="middle">
         <a href="https://lunanode.com" target="_blank">
           <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/lunanode.svg?sanitize=true" alt="LunaNode" height=100>
           <br/>
           <span>LunaNode</span>
         </a>
       </td>
-      <td align="center" valign="top" width="14.285714285714285714285714285714%">
+      <td align="center" valign="middle">
         <a href="https://walletofsatoshi.com/" target="_blank">
           <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/walletofsatoshi.svg?sanitize=true" alt="Wallet of Satoshi" height=100>
           <br/>
           <span>Wallet of Satoshi</span>
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://nomics.com/" target="_blank">
+          <img  src="https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/nomics.svg?sanitize=true" alt="Nomics" height=100>
+          <br/>
+          <span>Nomics</span>
         </a>
       </td>
     </tr>

@@ -1,6 +1,6 @@
 # BTCPay Server Apps
 
-The primary purpose of BTCPay Server is to remove dependencies on trusted third-parties. The Apps are built in applications that obsolete central-authorities and allow users an easy way to extend the [use case](UseCase.md) of the software. Users can self-host all sorts of customizable applications that work out of the box.
+The primary purpose of BTCPay Server is to remove dependencies on trusted third-parties. The Apps are built in applications that obsolete central-authorities and allow users an easy way to extend the [use case](./UseCase.md) of the software. Users can self-host all sorts of customizable applications that work out of the box.
 
 To create an app, go to Apps > Create a new app. Apps are store-dependent, which means that each app needs to be connected to a store.
 
@@ -14,15 +14,22 @@ Adding new products is easy. The app has a shopping cart feature, tips, product 
 
 Point of sale app can also be used for receiving donations or even as a small e-shop, depending on the customizations applied.
 
-1. Go to > Apps
-2. Add a name for your app
-3. Choose app type > Point Of Sale
-4. Select the store to associate with the app.
-5. Customize your PoS by adding your own items with prices, photos, and a description.
-6. Click "Save Settings".
-7. Click "View App" to view your PoS (Your customers can access the PoS through that link).
+Curently, the Point of Sale app supports three different views: 
+* A `Static` view representing only the items for sale.
+* A `Cart` view including items for sale and a cart for checkout.
+* A `Light` view consisting only of a keypad for easy and quick payments (Starting from [v1.0.5.6](https://blog.btcpayserver.org/btcpay-server-1-0-5-6/#simplePOS)).
 
-You can change the appearance of your Point of Sale app by following the [theme customization guide](Theme.md).
+To get your first Point of Sale app running, follow theses few simple steps:
+
+1. Go to `Apps` and `Create a new app`
+2. Add a `name` for your app
+3. Choose `app type` > Point Of Sale
+4. Select the `store` to associate with the app.
+5. Customize your PoS by choosing a `view` (Static, Cart, Light), adding your own `items` with prices, photos, and a description.
+6. Click `Save Settings`.
+7. Click `View App` to view your PoS (Your customers can access the PoS through that link).
+
+You can change the appearance of your Point of Sale app by following the [theme customization guide](./Theme.md).
 
 ## Crowdfunding App
 
@@ -39,7 +46,7 @@ Crowdfunding is an application which you can launch from BTCPay Server interface
 
 [![BTCPay Server Crowdfunding](https://img.youtube.com/vi/tFbfyneDj88/mqdefault.jpg)](https://www.youtube.com/watch?v=tFbfyneDj88 "BTCPay Server Crowdfunding")
 
-If you would like to provide digital or physical products to the backers of your crowdfunding campaign, you can [integrate WooCommerce store into it](FAQ/FAQ-Apps.md#how-to-integrate-woocommerce-store-into-a-btcpay-crowdfund-app). You can also set limits on contribution perks using the inventory feature.
+If you would like to provide digital or physical products to the backers of your crowdfunding campaign, you can [integrate WooCommerce store into it](./FAQ/FAQ-Apps.md#how-to-integrate-woocommerce-store-into-a-btcpay-crowdfund-app). You can also set limits on contribution perks using the inventory feature.
 
 ## Payment Button
 
