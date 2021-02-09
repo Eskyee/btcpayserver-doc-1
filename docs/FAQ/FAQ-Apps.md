@@ -15,7 +15,7 @@ This document covers frequently asked questions about the Apps in BTCPay.
 
 ## What are the Apps in BTCPay?
 
-Apps are plugins (features) you can use to expand the use case of your BTCPay.
+Apps are features you can use to expand the use case of your BTCPay. See the [apps doc](../Apps.md) for more information.
 
 ## Is there a limit on the number of Apps I can create?
 
@@ -148,7 +148,7 @@ In your BTCPay Server, create two separate stores:
 1. Store for WooCommerce
 2. Store for Crowdfunding app
 
-Add the **same xpub derivation scheme**, so that both stores remain in sync.
+Add the **same extended public key derivation scheme**, so that both stores remain in sync.
 
 #### 2. Modifying CSS in WordPress
 
@@ -235,7 +235,7 @@ If you add the php code directly into Appearance>Editor>functions.php, next time
 
 #### 3. Adding script to WordPress
 
-Install [Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/) plugin. Add the followig code to your header or footer. Settings > Headers and Footers Script, paste the code and save changes.
+Install [Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/) plugin. Add the following code to your header or footer. Settings > Headers and Footers Script, paste the code and save changes.
 
 ```html
 <script>

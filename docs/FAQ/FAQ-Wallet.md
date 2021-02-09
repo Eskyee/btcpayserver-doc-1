@@ -6,6 +6,7 @@ This document contains frequently asked questions related to BTCPay Server's [in
 * [How to set up my wallet with BTCPay Server?](#how-to-set-up-my-wallet-with-btcpay-server)
 * [Can I use a hardware wallet with BTCPay Server?](#can-i-use-a-hardware-wallet-with-btcpay-server)
 * [Do I have to use BTCPay Server wallet?](#do-i-have-to-use-btcpay-server-wallet)
+* [Why is sending a transaction in BTCPay Server using Trezor failing?](#why-is-sending-a-transaction-using-trezor-failing)
 * [Missing payments in wallet?](#missing-payments-in-my-software-or-hardware-wallet)
 * [What is a derivation scheme?](#what-is-a-derivation-scheme)
 * [What is a Replace-By-Fee (RBF) transaction?](#what-is-a-replace-by-fee-rbf-transaction)
@@ -33,13 +34,17 @@ This  means that you're using a hardware wallet without leaking information to t
 
 ## Do I have to use BTCPay Server wallet?
 
-By default BTCPay Server only requires an extended public key. To receive payments to your BTCPay store, you need to provide an extended public key (xpub) which you can generate in an external (existing) wallet. You do not have to use the built in wallet at all, you can manage funds in your [existing wallet](../WalletSetup.md#use-an-existing-wallet).
+By default BTCPay Server only requires an extended public key. To receive payments to your BTCPay store, you need to provide an extended public key which you can generate in an external (existing) wallet. You do not have to use the built in wallet at all, you can manage funds in your [existing wallet](../WalletSetup.md#use-an-existing-wallet).
 
 However, it's recommended to use the built in wallet for funds management. The built in wallet not only improves your privacy by default, but also solves user-experience issues like [gap-limit](#missing-payments-in-my-software-or-hardware-wallet).
 
+## Why is sending a transaction using Trezor failing?
+
+If you are experiencing problems (such as "user refused" or unresponsive Trezor) while trying to send a (PSBT) transaction using the BTCPay [HWI (Vault)](../HardwareWalletIntegration.md) and your Trezor wallet, enable the **Always include non-witness UTXO if available** setting by expanding the Advanced Settings on the Send page.
+
 ## Missing payments in my software or hardware wallet
 
-If you're using an [existing software or a hardware wallet](../WalletSetup.md#use-an-existing-wallet) with your BTCPay Server, you may experience a discrepancy between balance in your BTCPay wallet and the external wallet's web, destkop or mobile app. This discrepancy is usually related to a **gap-limit** issue.
+If you're using an [existing software or a hardware wallet](../WalletSetup.md#use-an-existing-wallet) with your BTCPay Server, you may experience a discrepancy between balance in your BTCPay wallet and the external wallet's web, desktop or mobile app. This discrepancy is usually related to a **gap-limit** issue.
 
 ### The gap limit problem
 
@@ -77,9 +82,9 @@ For best user-experience and privacy, we recommend that you consider dropping ex
 
 ## What is a derivation scheme?
 
-No matter [how you set up your wallet](../WalletSetup.md), BTCPay Server uses a `derivation scheme` to represent the destination of the funds received by your invoices. The destination of those funds will be your wallet, located by the xpubkey that you provide.
+No matter [how you set up your wallet](../WalletSetup.md), BTCPay Server uses a `derivation scheme` to represent the destination of the funds received by your invoices. The destination of those funds will be your wallet, located by the extended public key that you provide.
 
-Using different derivation schemes with your xpub, you can also choose to create various receiving address types, shown in your store invoices.
+Using different derivation schemes with your extended public key, you can also choose to create various receiving address types, shown in your store invoices.
 
 |Address Type|	Example |
 |:--|:--:|
@@ -89,6 +94,10 @@ Using different derivation schemes with your xpub, you can also choose to create
 |Multi-sig P2WSH	| 2-of-xpub1...-xpub2... |
 |Multi-sig P2SH-P2WSH	| 2-of-xpub1...-xpub2...-[p2sh] |
 |Multi-sig P2SH |	2-of-xpub1...-xpub2...-[legacy] |
+
+:::tip
+On top of the xPub extended public key formats shown above, BTCPay Server supports yPub and zPub formats. Please note that these will be converted to xPub once the wallet setup is completed. This has no effect on how you receive or send funds.
+:::
 
 ## What is a Replace-By-Fee (RBF) transaction?
 
