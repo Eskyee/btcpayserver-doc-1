@@ -70,7 +70,7 @@ If you subsequently change the iptables rules and want to save them across reboo
 These instructions configure everything to run under an **unprivileged user** called `admin`.  Create this user before proceeding:
 
 ```bash
-~$ sudo useradd -m -s /dev/null admin
+~$ sudo useradd -M admin && sudo usermod -L admin
 ```
 
 ### Prerequisites
@@ -944,7 +944,7 @@ lnd version 0.10.99-beta commit=clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e
 lnd looks for bitcoin.conf in a specific location to get necessary RPC and zeromq details.
 
 ```bash
-~$ ln -s /etc/bitcoin/bitcoin.conf ~/.bitcoin/bitcoin.conf
+~$ ln -s ~/.bitcoin/bitcoin.conf /etc/bitcoin/bitcoin.conf
 ```
 
 ##### 4. Create a configuration file.
