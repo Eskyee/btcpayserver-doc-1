@@ -16,12 +16,13 @@
   "config": {
     "dist": "docs/.vuepress/dist",
     "port": "8080",
-    "linkcheck": "blc -ro --filter-level 2 --requests 1 --exclude edit/master --exclude issues/new --exclude directory.btcpayserver.org --exclude foundation.btcpayserver.org --exclude install.btcpayserver.org --exclude bitma.tk --exclude cyberciti.biz --exclude drupal.org --exclude dyn.com --exclude facebook.com --exclude figma.com --exclude linkedin.com --exclude pi-hole.net --exclude reddit.com  --exclude t.me --exclude transifex.com --exclude twitter.com --exclude wiki.ion.radar.tech"
+    "linkcheck": "blc -ro --filter-level 2 --requests 1 --exclude edit/master --exclude issues/new --exclude directory.btcpayserver.org --exclude foundation.btcpayserver.org --exclude install.btcpayserver.org --exclude bitma.tk --exclude cyberciti.biz --exclude drupal.org --exclude dyn.com --exclude example.com --exclude facebook.com --exclude figma.com --exclude ipchicken.com --exclude linkedin.com --exclude linuxize.com --exclude linuxconfig.org --exclude pi-hole.net --exclude reddit.com  --exclude t.me --exclude transifex.com --exclude twitter.com --exclude wiki.ion.radar.tech"
   },
   "scripts": {
     "prestart": "rm -rf $npm_package_config_dist",
     "start": "NODE_ENV=development vuepress dev docs -p $npm_package_config_port",
     "build": "NODE_ENV=production vuepress build docs",
+    "netlify": "./setup-deps.sh && npm run build",
     "test": "jest",
     "linkcheck": "start-server-and-test linkcheck:serve $npm_package_config_port linkcheck:local",
     "linkcheck:serve": "serve -p $npm_package_config_port $npm_package_config_dist",
@@ -36,7 +37,7 @@
     "jest": "26.6.3",
     "markdown-it-implicit-figures": "0.10.0",
     "serve": "11.3.2",
-    "start-server-and-test": "1.12.0",
+    "start-server-and-test": "1.12.1",
     "vuepress": "1.8.2",
     "vuepress-plugin-clean-urls": "1.1.2",
     "vuepress-plugin-code-copy": "1.0.6",

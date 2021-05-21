@@ -37,13 +37,11 @@ module.exports = [
   { path: '/getting-started/connectwallet/electrumwallet', redirect: '/ElectrumWallet/' },
   { path: '/getting-started/connectwallet/electrumwallet/electrumx', redirect: '/ElectrumX/' },
   { path: '/getting-started/connectwallet/electrumwallet/electrumpersonalserver', redirect: '/ElectrumPersonalServer/' },
-  { path: '/getting-started/connectwallet/hotwallet', redirect: '/HotWallet/' },
   { path: '/getting-started/whatsnext', redirect: '/WhatsNext/' },
   // Features
   { path: '/features', redirect: '/Apps/' },
   { path: '/features/apps', redirect: '/Apps/' },
   { path: '/features/wallet', redirect: '/Wallet/' },
-  { path: '/features/wallet/hotwallet', redirect: '/HotWallet/' },
   { path: '/features/invoices', redirect: '/Invoices/' },
   { path: '/features/lightningnetwork', redirect: '/LightningNetwork/' },
   { path: '/features/accounting', redirect: '/Accounting/' },
@@ -87,5 +85,7 @@ module.exports = [
   { path: '/support-and-community/translate', redirect: '/Translate/' },
   { path: '/support-and-community/community', redirect: '/Community/' },
   // Old paths in new docs
-  { path: '/DockerDeployment/', redirect: '/Docker/' }
+  { path: '/DockerDeployment/', redirect: '/Docker/' },
+  { path: '/HotWallet/', redirect: '/CreateWallet/' },
+  { path: '/HardwareWalletIntegration/', redirect: '/ConnectWallet/' }
 ]

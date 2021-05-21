@@ -20,16 +20,6 @@ module.exports = {
   title,
   description: "BTCPay Server Official Documentation",
   head: [
-    // Favicon
-    ["link", { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }],
-    ["link", { rel: "manifest", href: "/site.webmanifest" }],
-    ["link", { rel: "mask-icon", href: "/safari-pinned-tab.svg", color: "#51b13e" }],
-    ["meta", { name: "msapplication-TileColor", content: "#0f3b21" }],
-    ["meta", { name: "theme-color", content: "#ffffff" }],
-
-    // Styles
     ["link", { rel: "stylesheet", href: "/styles/btcpayserver-variables.css" }]
   ],
   chainWebpack (config) {
@@ -229,28 +219,12 @@ module.exports = {
             initialOpenGroupIndex: -1,
             children: [
               {
-                title: "Use existing hardware wallet",
-                path: "/HardwareWalletIntegration",
-                children: [
-                  ["/ColdCardWallet", "ColdCard Wallet"]
-                ]
+                title: "Connect Wallet",
+                path: "/ConnectWallet"
               },
               {
-                title: "Use existing software wallet",
-                children: [
-                  {
-                    title: "Electrum Wallet",
-                    path: "/ElectrumWallet",
-                  },
-                  ["/WasabiWallet", "Wasabi Wallet"]
-                ]
-              },
-              {
-                title: "Create a new wallet",
-                path: "/CreateWallet",
-                children: [
-                  ["/HotWallet", "Hot Wallet"]
-                ]
+                title: "Create Wallet",
+                path: "/CreateWallet"
               }
             ]
           },
