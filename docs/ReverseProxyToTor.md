@@ -10,6 +10,7 @@
 
 * a Virtual Private Server (VPS) - eg. a minimal package on Lunanode for ~3.5$/month
 * root access on the VPS - you need to set up webserver and install packages
+* a domain or subdomain - this will be setup on the proxy webserver
 
 Get the Tor `.onion` address of your BTCPay Server via the `Server settings > Services` page.
 See information in the "HTTP-based TOR hidden services" section.
@@ -53,7 +54,7 @@ Create the configuration for the service in `/etc/http-to-socks-proxy/btcpayserv
 mkdir -p /etc/http-to-socks-proxy/
 
 # create the file with the content below
-nano /etc/systemd/system/http-to-socks-proxy@.service
+nano /etc/http-to-socks-proxy/btcpayserver.conf
 ```
 
 Replace the `REMOTE_HOST` and adapt the ports if needed:
@@ -86,6 +87,10 @@ netstat -tulpn | grep socat
 
 ### Webserver setup
 
+#### Point domain to the VPS
+
+Create the A record on the DNS server of your domain/subdomain and point it to your VPS IP address.
+
 #### Prepare SSL and Let's Encrypt
 
 ```bash
@@ -100,12 +105,17 @@ chmod g+s /var/lib/letsencrypt
 
 #### nginx configuration: http
 
-Create a variable mapping to forward the correct protocol setting, e.g. `/etc/nginx/conf.d/map.conf`:
+Create a variable mapping to forward the correct protocol setting and check if the Upgrade header is sent by the client, e.g. `/etc/nginx/conf.d/map.conf`:
 
 ```nginx
 map $http_x_forwarded_proto $proxy_x_forwarded_proto {
   default $http_x_forwarded_proto;
   ''      $scheme;
+}
+
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
 }
 ```
 
@@ -180,18 +190,19 @@ server {
   resolver_timeout 30s;
 
   add_header Strict-Transport-Security "max-age=63072000" always;
-  add_header X-Frame-Options SAMEORIGIN;
+  add_header Content-Security-Policy "frame-ancestors 'self';";
   add_header X-Content-Type-Options nosniff;
 
   # Proxy requests to the socat service
   location / {
     proxy_pass http://127.0.0.1:9081/;
+    proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
     proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
+    proxy_set_header Connection $connection_upgrade;
   }
 }
 ```
@@ -210,3 +221,4 @@ Now, visiting `mydomain.com` should show your BTCPay Server instance.
 * [Tor-to-IP tunnel service](https://github.com/openoms/bitcoin-tutorials/blob/master/tor2ip_tunnel.md)
 * [How to make a nginx reverse proxy direct to tor hidden service](https://stackoverflow.com/questions/55487324/how-to-make-a-nginx-reverse-proxy-direct-to-tor-hidden-service)
 * [Secure Nginx with Let's Encrypt on Debian 10 Linux](https://linuxize.com/post/secure-nginx-with-let-s-encrypt-on-debian-10/)
+* [Nginx WebSocket proxying](http://nginx.org/en/docs/http/websocket.html)

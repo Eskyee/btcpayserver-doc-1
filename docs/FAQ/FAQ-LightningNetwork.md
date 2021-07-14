@@ -26,6 +26,7 @@ This document clarifies some of the most common questions and issues users face 
 * [Which macaroon needs to be provided for external nodes?](FAQ-LightningNetwork.md#which-macaroon-needs-to-be-provided-for-external-nodes)
 * [LND connection issue - cannot get macaroon: root key with id 0 doesn’t exist](FAQ-LightningNetwork.md#lnd-connection-issues-after-an-update)
 * [How to change LND Node alias](FAQ-LightningNetwork.md#how-to-change-my-lnd-node-alias)
+* [How to edit lnd.conf](FAQ-LightningNetwork.md#how-to-edit-lndconf)
 * [How to install ThunderHub](FAQ-LightningNetwork.md#how-to-install-thunderhub)
 
 ## [Lightning Network (c-lightning) FAQ](FAQ-LightningNetwork.md#lightning-network-c-lightning-faq)
@@ -187,7 +188,7 @@ Here is how it should look like:
 
 ### Can I use a pruned node with LN in BTCPay?
 
-It is recommended to use c-lightning because the implementation supports pruned nodes. 
+It is recommended to use c-lightning because the implementation supports pruned nodes.
 
 :::warning
 It is possible in BTCPay to enable LND with a pruned node, however the LND implementation does not officially support it for reasons [listed here](https://github.com/lightningnetwork/lnd/blob/master/docs/safety.md#pruned-bitcoind-node). It's not possible to use pruning with Eclair.
@@ -202,6 +203,11 @@ To do so, go to the lightning node settings page of your store (Store > Settings
 The connection strings vary per lightning implementation, the [settings page](../LightningNetwork.md#connecting-an-external-lightning-node-in-btcpay) contains the documentation for the connection settings to give you further guidance.
 
 ### How to change from c-lightning to LND or vice-versa?
+
+:::warning
+Be sure to have closed all channels and removed both on-chain and Lightning funds from the Lightning node before switching from one to the other.
+
+:::
 
 You need to SSH log in into your virtual machine.
 
@@ -366,6 +372,30 @@ export LIGHTNING_ALIAS="namehere"
 . ./btcpay-setup.sh -i
 ```
 
+### How to edit lnd.conf?
+
+To customize LND settings which are not available as environment variables, you can [create a custom fragment](../Docker/README.md#how-can-i-customize-the-generated-docker-compose-file) in `docker-compose-generator/docker-fragments/opt-lnd-config.custom.yml` like this:
+
+```yml
+version: "3"
+services:
+  lnd_bitcoin:
+    environment:
+      LND_EXTRA_ARGS: |
+        minchansize=1234567
+```
+
+You can add your customizations in the `LND_EXTRA_ARGS` value, like shown by setting the `minchansize` value.
+
+Afterwards the configuration has to be added to the additional fragments and setup needs to be run:
+
+```bash
+export BTCPAYGEN_ADDITIONAL_FRAGMENTS="$BTCPAYGEN_ADDITIONAL_FRAGMENTS;opt-lnd-config.custom"
+. ./btcpay-setup.sh -i
+```
+
+This way your custom settings gets added to the config and they will persist updates.
+
 ### How to install ThunderHub?
 
 To install ThunderHub on your instance apply the following:
@@ -464,9 +494,9 @@ If you're facing a technical problem with your Lightning Network implementation,
 
 * [LND GitHub](https://github.com/lightningnetwork/lnd/issues)
 * [Lightning Community on Slack](https://lightningcommunity.slack.com)
-* [#lightning-dev](https://webchat.freenode.net/?channels=lightning-dev&uio=d4) on IRC
 
 #### c-lightning Support
 
 * [c-lightning GitHub](https://github.com/ElementsProject/lightning/issues)
-* [#lightning-dev](https://webchat.freenode.net/?channels=lightning-dev&uio=d4) on IRC
+* [c-lightning Telegram Group](https://t.me/lightningd)
+* [c-lightning docs](https://lightning.readthedocs.io/)

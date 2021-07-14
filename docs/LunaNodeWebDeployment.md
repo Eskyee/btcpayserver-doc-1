@@ -2,7 +2,7 @@
 
 This article explains the **deployment of BTCPay Server through LunaNode Web-Wizard**. [LunaNode](https://www.lunanode.com/) is Canadian based hosting provider that accept Bitcoin payments and requires no personal identification except for a phone number verification.
 
-Their web-wizard is one of the easiest ways to **deploy BTCPay Servers from a very user-friendly interface**. This method is highly recommended if you don't have a lot of technical knowledge. LunaNode will provide you with a generic domain for your server to get you started. If you want to set up a custom domain you will need to have some comfort with the command line interface. 
+Their web-wizard is one of the easiest ways to **deploy BTCPay Servers from a very user-friendly interface**. This method is highly recommended if you don't have a lot of technical knowledge. LunaNode will provide you with a generic domain for your server to get you started. If you want to set up a custom domain you will need to have some comfort with the command line interface.
 
 For the price of around US$8.80 per month, you can have a **self-hosted BTCpay**, which includes a Bitcoin full node and Lightning Network node.
 
@@ -49,3 +49,8 @@ $ . btcpay-restart.sh -i
 8. Visit the domain, create an account and log in.
 
 Now you need to wait for blockchain to sync fully. Depending on the plan you used and the number of coins you added, that can take 1-7 days. If you enable CPU utilization, with Bitcoin and LND, it will take 1-2 days. There is a US$ 3 one-time charge for faster sync if you enable the CPU utilization. The sync pop-up window will disappear when your node fully syncs.
+
+## 4. Additional customization (optional)
+
+Once your BTCPay Server instance is setup, as with any deployment method, you can add environment variables such as activating keysend and autopilot for LND as well as get access to your own transmuter.
+For more information, visit the available [environment variable list](https://docs.btcpayserver.org/Docker/#generated-docker-compose). This requires knowledge of how to [SSH into your server](./FAQ/FAQ-ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps).
