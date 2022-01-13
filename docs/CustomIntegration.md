@@ -2,7 +2,7 @@
 
 BTCPay Server provides 2 APIS in order to integrate with it:
 
-* [GreenField API](./GreenFieldExample.md) - A RESTful API that aims to allow you to use BTCPay Server headless. This is the recommended API for projects which do not wish to recycle code from a Bitpay integration.
+* [GreenField API](/Development/GreenFieldExample.md) - A RESTful API that aims to allow you to use BTCPay Server headless. This is the recommended API for projects which do not wish to recycle code from a Bitpay integration.
 * Bitpay Invoice API - BTCPay implements the same API as Bitpay for creating and managing invoices.
 
 **Migrating from BitPay to BTCPay** normally is as easy as changing a URL.
@@ -112,7 +112,7 @@ window.btcpay.showInvoice(invoiceId);
 ```js
 window.btcpay.onModalWillEnter(yourCallbackFunction);
 window.btcpay.onModalWillLeave(yourCallbackFunction);
-window.btcpay.onModalReceiveMessageMethod(yourCallbackFunction); // available from v1.0.5.6
+window.btcpay.onModalReceiveMessage(yourCallbackFunction); // available from v1.0.5.6
 ```
 
-`onModalReceiveMessageMethod` will invoke your callback when a new status has been pushed from BTCPay Server to the invoice UI. The data format is `{invoiceId: "x", status: "y" }`
+`onModalReceiveMessage` will invoke your callback when a new status has been pushed from BTCPay Server to the invoice UI. The data format is `{invoiceId: "x", status: "y" }`

@@ -8,7 +8,9 @@ PUBLIC_DIR="$DOCS_DIR/.vuepress/public"
 BTCPAYSERVER_DIR="$BASE_DIR/deps/btcpayserver"
 CONFIGURATOR_DIR="$BASE_DIR/deps/configurator"
 DOCKER_DIR="$BASE_DIR/deps/docker"
+VAULT_DIR="$BASE_DIR/deps/vault"
 TRANSMUTER_DIR="$BASE_DIR/deps/transmuter"
+ZAPIER_DIR="$BASE_DIR/deps/zapier"
 
 update_external() {
   file="$1"
@@ -40,7 +42,7 @@ cd "$BTCPAYSERVER_DIR"
 cp SECURITY.md "$DOCS_DIR/BTCPayServer/Security.md"
 cp BTCPayServer.Tests/README.md "$DOCS_DIR/BTCPayServer/LocalDevSetup.md"
 line=$(grep -n '## How to manually test payments' $DOCS_DIR/BTCPayServer/LocalDevSetup.md | cut -d ":" -f 1)
-{ echo $'---\neditLink: https://github.com/btcpayserver/btcpayserver-doc/edit/master/docs/LocalDev.md\n---\n'; cat "$DOCS_DIR/LocalDev.md"; echo; tail -n +$line "$DOCS_DIR/BTCPayServer/LocalDevSetup.md"; } > "$DOCS_DIR/LocalDevelopment.md"
+{ echo $'---\neditLink: https://github.com/btcpayserver/btcpayserver-doc/edit/master/docs/Development/LocalDev.md\n---\n'; cat "$DOCS_DIR/Development/LocalDev.md"; echo; tail -n +$line "$DOCS_DIR/BTCPayServer/LocalDevSetup.md"; } > "$DOCS_DIR/Development/LocalDevelopment.md"
 
 for file in "$DOCS_DIR"/BTCPayServer/*.md; do
   update_external "$file" https://github.com/btcpayserver/btcpayserver "$DOCS_DIR"/BTCPayServer/
@@ -52,6 +54,26 @@ git checkout $(git tag --sort=-refname | awk 'match($0, /^v[0-9]+\./)' | head -n
 if command -v jq >/dev/null 2>&1; then
   jq -rs 'reduce .[] as $item ({}; . * $item)' BTCPayServer/wwwroot/swagger/v1/*.json > "$PUBLIC_DIR/API/Greenfield/v1/swagger.json"
 fi
+
+# Vault
+
+echo "Setup dependency: Vault"
+
+rm -rf "$DOCS_DIR/Vault"
+mkdir -p "$DOCS_DIR/Vault"
+
+if [ ! -d "$VAULT_DIR" ]; then
+  git clone https://github.com/btcpayserver/BTCPayServer.Vault.git "$VAULT_DIR"
+else
+  cd "$VAULT_DIR" && git checkout master && git pull
+fi
+
+cd "$VAULT_DIR"
+cp -r README.md docs/* "$DOCS_DIR/Vault"
+sed -ie 's$(docs/$(./$g' "$DOCS_DIR/Vault/README.md"
+for file in "$DOCS_DIR"/Vault/*.md; do
+  update_external "$file" https://github.com/btcpayserver/BTCPayServer.Vault "$DOCS_DIR"/Vault/
+done
 
 # Configurator
 
@@ -87,7 +109,9 @@ else
 fi
 
 cd "$DOCKER_DIR"
-cp -r README.md docs/* "$DOCS_DIR/Docker"
+cp -r docs/* "$DOCS_DIR/Docker"
+line=$(grep -n '# Introduction' README.md | cut -d ":" -f 1)
+tail -n +$line "README.md" > "$DOCS_DIR/Docker/README.md"
 sed -ie 's$(docs/$(./$g' "$DOCS_DIR/Docker/README.md"
 for file in "$DOCS_DIR"/Docker/*.md; do
   update_external "$file" https://github.com/btcpayserver/btcpayserver-docker "$DOCS_DIR"/Docker/
@@ -111,4 +135,25 @@ cp -r README.md docs/* "$DOCS_DIR/Transmuter"
 sed -ie 's$(docs/$(./$g' "$DOCS_DIR/Transmuter/README.md"
 for file in "$DOCS_DIR"/Transmuter/*.md; do
   update_external "$file" https://github.com/btcpayserver/btcTransmuter "$DOCS_DIR"/Transmuter/
+done
+
+
+# Zapier
+echo "Setup dependency: Zapier"
+
+rm -rf "$ZAPIER_DIR"
+rm -rf "$DOCS_DIR/Zapier"
+mkdir -p "$DOCS_DIR/Zapier"
+
+if [ ! -d "$ZAPIER_DIR" ]; then
+  git clone --depth 1 https://github.com/btcpayserver/zapier.git "$ZAPIER_DIR"
+else
+  cd "$ZAPIER_DIR"
+fi
+
+cd "$ZAPIER_DIR"
+cp -r README.md doc/* "$DOCS_DIR/Zapier"
+sed -ie 's$(./doc/$(./$g' "$DOCS_DIR/Zapier/README.md"
+for file in "$DOCS_DIR"/Zapier/*.md; do
+  update_external "$file" https://github.com/btcpayserver/zapier "$DOCS_DIR"/Zapier/
 done

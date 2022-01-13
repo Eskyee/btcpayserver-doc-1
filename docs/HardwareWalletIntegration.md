@@ -50,7 +50,7 @@ Once you’ve received funds to your wallet and you decide to spend them, you ca
 
 Additional transaction settings can be found by clicking on the [Advanced Settings](Wallet.md#advanced-settings) button. If you are not familiar with these types of settings, you may leave them as is to use the default settings.
 
-If you are experiencing issues sending transactions from a Trezor wallet, you may need to enable [this advanced setting](FAQ/FAQ-Wallet.md#why-is-sending-a-transaction-using-trezor-failing).
+If you are experiencing issues sending transactions from a Trezor wallet, you may need to enable [this advanced setting](FAQ/Wallet.md#why-is-sending-a-transaction-using-trezor-failing).
 
 ![Send Bitcoin via BTCPay Vault](./img/BTCPayVaultWalletSend2.png "Send Bitcoin via BTCPay Vault")
 
@@ -59,5 +59,5 @@ If you are experiencing issues sending transactions from a Trezor wallet, you ma
 The list of supported hardware wallets is available [on this link](https://github.com/bitcoin-core/HWI#device-support).
 
 :::warning
-The hardware wallet integration in BTCPay Server only supports Bitcoin. [Altcoin](Altcoins.md) wallets enabled on your server won't work.
+The hardware wallet integration in BTCPay Server only supports Bitcoin. [Altcoin](/Development/Altcoins.md) wallets enabled on your server won't work.
 :::

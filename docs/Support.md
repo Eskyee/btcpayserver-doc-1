@@ -26,16 +26,16 @@ Contact: mail@d11n.net, @d11n on [Mattermost](https://chat.btcpayserver.org/), [
 
 ### Esky33
 
-> BTCPayServer local or cloud installation (Lunanode/other VPS). I can help with the initial setup/deployment,  
+> BTCPayServer local or cloud installation (Lunanode/other VPS). I can help with the initial setup/deployment,
 
 Contact: support@btcpayjungle.com - @Esky33 on [Mattermost](https://chat.btcpayserver.org/) -  [Twitter](https://twitter.com/Esky33junglist)
- 
+
 ### Graeme Conradie
 
-> I can help you implement BTCPay Server inside your environment and also help with the supporting systems, your site, your hosting architecture, your security. I find what people need is a good solid starting point, and some basic guidance on best practice.
+> I help with building your payments infrastructure, modifying and adapting the payment server to reflect your brand and integrate aspects of your services directly into your server. I also help organisations add their own currencies, or implement alternative currencies. I do security and infrastructure audits and provide DevOps related services.
 
-Contact: graeme@fintechsystems.ltd, @Graeme on [FinChat](https://chat.fintechsystems.ltd), @GraemeConradie on [Mattermost](https://chat.btcpayserver.org/), [Twitter](https://twitter.com/GraemeConradie), [Website](https://graemeconradie.com/)
- 
+Contact: graeme@librty.tools, @xoxoxo on [Mattermost](https://chat.btcpayserver.org/), [Personal Website](https://graemeconradie.com), [Librty Tools](https://librty.tools), [Librty Chat](https://chat.librty.tools), [Hire me](https://graemeconradie.com/hire-me), follow my [Projects](https://graemeconradie.com/projects), or [Send me a message](https://graemeconradie.com/contact).
+
 ### Hubik Tomas
 
 > I can help with initial setup/deployment (currently with Azure, but I am planning to play with non-Azure as well) and integration with PrestaShop. I was also playing with design customization of the payment window, scripting of exchange rates etc.
@@ -47,3 +47,9 @@ Contact: hubik.tomas@gmail.com
 > BTCPayServer local or cloud installation (Azure/other VPS).  Can also help with WooCommerce Plugin configuration and BTCPayServer Store/App creation.
 
 Contact: support@lightninginabox.co, [Web](https://lightninginabox.co)
+
+### Wouter Samaey / Storefront.be
+
+> I can help you integrate BTCPayServer with Magento 1, 2 or OpenMage and most other PHP-based eCommerce backends + API development and automation + BTCPay Server setup & Linux server management.
+
+Contact: wouter.samaey@storefront.be - [Website](https://www.storefront.be) - [Twitter](https://twitter.com/woutersamaey)
